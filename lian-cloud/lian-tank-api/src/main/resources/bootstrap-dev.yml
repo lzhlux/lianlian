@@ -1,0 +1,104 @@
+
+spring:
+  application:
+    name: tank-api
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      enabled: true
+      discovery:
+        register: true
+        instanceId: tank-api_id_1
+        serviceName: tank-api
+        hostname: localhost
+        port: 8769
+  main:
+    allow-bean-definition-overriding: true
+  aop:
+    proxy-target-class: false
+logging:
+  level:
+    root: info
+feign:
+  hystrix:
+    enabled: false
+ribbon:
+  eager-load:
+    enabled: true
+server:
+  port: 8769
+  tomcat:
+    accesslog:
+      directory: /logs/${spring.application.name}/${server.port}/accesslog/
+      enabled: true
+      pattern: "%t [%I] %{X-Forwarded-For}i %l %u %r %s %b %D"
+      prefix: access_log
+      suffix: .log
+      file-date-format: .yyyy-MM-dd
+      rotate: true
+
+---
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/lianliantest?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x' from dual
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    filter:
+      stat:
+        enabled: true
+        # 慢SQL记录
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: true
+      wall:
+        config:
+          multi-statement-allow: true
+        #数据库过滤器
+      config:
+        enabled: true
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.lianlian.tank
+ribbon:
+  ReadTimeout: 300000
+  ConnectTimeout: 30000
+  eager-load:
+    enabled: true
+feign:
+  hystrix:
+    enabled: false

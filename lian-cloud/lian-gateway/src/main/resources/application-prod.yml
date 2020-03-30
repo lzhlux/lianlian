@@ -1,0 +1,404 @@
+spring:
+  application:
+    name: gateway
+  data:
+    rest:
+      basePath: /api/v1
+  http:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  servlet:
+    multipart:
+      max-File-Size: 10MB
+      max-Request-Size: 10MB
+  cloud:
+    consul:
+      host: 172.31.39.184
+      port: 8500
+      enabled: true
+      discovery:
+        register: true
+        instanceId: gateway_id_1
+        serviceName: gateway
+        hostname: 172.31.39.191
+        port: 8888
+
+server:
+  address: 0.0.0.0
+  port: 8888
+  tomcat:
+    maxFileSize: 10000000
+    maxHttpPostSize: 10000000
+    uri-encoding: UTF-8
+
+#zuul路由转发配置
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  sensitive-headers:
+  routes:
+    wallet_system:
+      path: /wallet_system/**
+      url: http://172.31.39.184:3000
+    account:
+      path: /account/**
+      url: http://172.31.39.182:7001
+    api_integral:
+      path: /api_integral/**
+      url: http://172.31.39.184:4397
+    dictionary:
+      path: /api_dictionary/**
+      url: http://172.31.39.184:9011
+    api_ticpush:
+      path: /api_ticpush/**
+      url: http://172.31.39.184:7777
+    api_order:
+      path: /api_order/**
+      url: http://172.31.39.184:7009
+    api_kline:
+      path: /api_kline/**
+      url: http://172.31.39.184:3007
+    api_token_and_wallet:
+      path: /api_token_and_wallet/**
+      url: http://172.31.39.182:7654
+    api_blockchain:
+      path: /api_blockchain/**
+      url: http://172.31.39.182:7676
+    twallet_fund:
+      path: /twallet_fund/**
+      url: http://172.31.39.184:5806
+    api_payment:
+      path: /api_payment/**
+      url: http://172.31.39.182:7653
+    api_subscribe:
+      path: /api_subscribe/**
+      url: http://172.31.39.184:7879
+    api_key:
+      path: /api_key/**
+      url: http://172.31.39.182:3013
+myyml:
+  allowUrl:
+    - url: /
+      methods:
+        - get
+    - url: /actuator/**
+      methods:
+        - get
+    - url: /api_integral_wlsc/**
+      methods:
+        - get
+    - url: /api_futureshop/**
+      methods:
+        - get
+    - url: /api_blockchain/**
+      methods:
+        - get
+    - url: /api_kline/**
+      methods:
+        - get
+    - url: /api_order/**
+      methods:
+        - get
+        - post
+        - put
+    - url: /api_token_and_wallet/**
+      methods:
+        - get
+    - url: /api_payment/**
+      methods:
+        - get
+        - post
+    - url: /api_subscribe/**
+      methods:
+        - get
+    - url: /apiSettlement/**
+      methods:
+        - get
+        - post
+        - PUT
+        - DELETE
+    - url: /twallet_fund/**
+      methods:
+        - get
+        - post
+        - PUT
+        - DELETE
+    - url: /api_tic/**
+      methods:
+        - get
+    - url: /api_key/**
+      methods:
+        - get
+    - url: /apiIda
+      methods:
+        - get
+    - url: /apiIda/
+      methods:
+        - get
+    - url: /api_integral
+      methods:
+        - get
+    - url: /api_integral/
+      methods:
+        - get
+    - url: /account/
+      methods:
+        - get
+    - url: /account
+      methods:
+        - get
+    - url: /api_dictionary/**
+      methods:
+        - get
+        - post
+        - PUT
+        - DELETE
+        - post
+    - url: /api_ticpush/**
+      methods:
+        - get
+    - url: /file/**
+      methods:
+        - post
+        - get
+    - url: /wallet_system/api/v1/tokens/showTokens
+      methods:
+        - post
+    - url: /wallet_system/api/v1/ticPush/register
+      methods:
+        - post
+    - url: /wallet_system/api/v1/ticPush/pushTxMsg
+      methods:
+        - post
+    - url: /wallet_system/api/v1/exchangeRate/getRate
+      methods:
+        - post
+    - url: /wallet_system/api/v1/walletConfig/getGasLimit
+      methods:
+        - post
+    - url: /wallet_system/api/v1/wallet/marketSymbol
+      methods:
+        - get
+    - url: /wallet_system/api/v1/market/getMarket
+      methods:
+        - get
+    - url: /wallet_system/api/v1/ticPush/pushTxMsg
+      methods:
+        - get
+    - url: /wallet_system/api/v1/version/getlatestVersionMsg
+      methods:
+        - get
+    - url: /wallet_system/api/v1/version
+      methods:
+        - get
+    - url: /wallet_system/api/v1/wallet/carousels
+      methods:
+        - get
+    - url: /wallet_system/api/v1/infos/getArticle
+      methods:
+        - get
+    - url: /wallet_system/api/v1/infos/getlatestInfos
+      methods:
+        - get
+    - url: /wallet_system/api/v1/wallet/infoApps
+      methods:
+        - get
+    - url: /wallet_system/api/v1/infoApps/getAppsList
+      methods:
+        - get
+    - url: /wallet_system/api/v1/investors/getInvestorsList
+      methods:
+        - get
+    - url: /wallet_system/api/v1/carousels/**
+      methods:
+        - get
+        - patch
+        - options
+    - url: /wallet_system/api/v1/wallet/lockPositionProjs
+      methods:
+        - get
+        - patch
+    - url: /wallet_system/api/v1/lockPositionProjs
+      methods:
+        - get
+        - patch
+    - url: /wallet_system
+      methods:
+        - get
+    - url: /wallet_system/
+      methods:
+        - get
+    - url: /wallet_system/api/v1/wallet/infos/getlatestInfos
+      methods:
+        - get
+    - url: /wallet_system/api/v1/wallet/infoApps
+      methods:
+        - get
+    - url: /wallet_system/api/v1/infoApps/getAppsList
+      methods:
+        - get
+    - url: /account/api/v1/register
+      methods:
+        - post
+    - url: /account/api/v1/forget/pwd
+      methods:
+        - put
+    - url: /account/api/v1/pay/verify
+      methods:
+        - get
+        - post
+    - url: /account/api/v1/find/account
+      methods:
+        - post
+        - get
+    - url: /account/api/v1/pay/pwd
+      methods:
+        - post
+        - get
+        - put
+    - url: /account/api/v1/verify/face/notify
+      methods:
+        - post
+    - url: /account/api/v1/verify/face/return
+      methods:
+        - post
+    - url: /wallet_system/api/v1/wallet/constants
+      methods:
+        - get
+    - url: /wallet_system/api/v1/phone/register
+      methods:
+        - post
+    - url: /wallet_system/api/v1/phone
+      methods:
+        - get
+    - url: /wallet_system/api/v1/**
+      methods:
+        - get
+        - post
+    - url: /wallet_system/api/v1/adminLogin
+      methods:
+        - post
+    - url: /wallet_system/api/v1/wallet/currentDepositInvestment
+      methods:
+        - get
+    - url: /api_integral/api/v1/**
+      methods:
+        - get
+        - post
+    - url: /api_integral/api/v1/integral_record/**
+      methods:
+        - get
+        - post
+    - url: /apiIda/api/v1/eos_price
+      methods:
+        - get
+    - url: /account/api/v1/msm/**
+      methods:
+        - get
+        - post
+    - url: /account/api/v1/msm/obtain/**
+      methods:
+        - get
+        - post
+    - url: /api/v1/msm/**
+      methods:
+        - get
+        - post
+    - url: /api/v1/find/**
+      methods:
+        - get
+    - url: /api_order/api/v1/ETH/order/**
+      methods:
+        - get
+    - url: /api_order/api/v1/usdt/order/**
+      methods:
+        - get
+        - post
+    - url: /api_futureshop/api/v1/gaoding/buy
+      methods:
+        - get
+        - post
+    - url: /api_token_and_wallet/api/v1/wallet/**
+      methods:
+        - get
+        - post
+    - url: /api_token_and_wallet/api/v1/addressJPush
+      methods:
+        - get
+        - post
+    - url: /api_kline/api/v1/kline/token
+      methods:
+        - get
+        - post
+    - url: /api_kline/api/v1/kline/token/**
+      methods:
+        - post
+    - url: /api_kline/api/v1/kline/local_price/**
+      methods:
+        - get
+        - post
+        - put
+    - url: /twallet_fund/api/v1/erc20Coin/**
+      methods:
+        - get
+        - post
+        - put
+        - delete
+    - url: /twallet_fund/api/v1/investNum/**
+      methods:
+        - get
+    - url: /api_token_and_wallet/api/v1/**
+      methods:
+        - get
+        - put
+        - delete
+        - post
+    - url: /api_token_and_wallet/api/v1/token/**
+      methods:
+        - post
+    - url: /api_ticpush/api/v1/transaction/**
+      methods:
+        - get
+        - post
+        - put
+        - delete
+  routeAndRole:
+  ################### 文件系统 ###########################
+  #    - url: /file/**
+  #      methods:
+  #        - post
+  #        - get
+  #      roles:
+  #        - root
+  #        - normal
+  #        - USER
+  #    - url: /role/**
+  #      methods:
+  #        - get
+  #      roles:
+  #        - root
+  #    - url: /**
+  #      methods:
+  #        - get
+  #        - post
+  #      roles:
+  #        - USER
+  ################### 文件系统 ###########################
+#security:
+#  oauth2:
+#    sso:
+#      loginPath: /login   # 登录路径
+#    client:
+#      clientId: aeaacc45cacdc0318b06
+#      clientSecret: d883e6e713ab5715fa67b5aee9282edff41dc41f
+#      accessTokenUri: https://github.com/login/oauth/access_token
+#      userAuthorizationUri: https://github.com/login/oauth/authorize
+#    resource:
+#      userInfoUri: https://api.github.com/user
+#      preferTokenInfo: false

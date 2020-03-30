@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianlian.tank.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lianlian.entity.UserEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="mall_openid" jdbcType="VARCHAR" property="mallOpenid" />
+    <result column="yuer_openid" jdbcType="VARCHAR" property="yuerOpenid" />
+    <result column="service_number_openid" jdbcType="VARCHAR" property="serviceNumberOpenid" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="isLeaguer" jdbcType="INTEGER" property="isleaguer" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="recommenderId" jdbcType="BIGINT" property="recommenderid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="drawNum" jdbcType="INTEGER" property="drawnum" />
+    <result column="lastDrawTime" jdbcType="TIMESTAMP" property="lastdrawtime" />
+    <result column="todayDrawNum" jdbcType="INTEGER" property="todaydrawnum" />
+    <result column="fansNum" jdbcType="INTEGER" property="fansnum" />
+    <result column="lastShareTime" jdbcType="TIMESTAMP" property="lastsharetime" />
+    <result column="weChatId" jdbcType="VARCHAR" property="wechatid" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="disableStatus" jdbcType="BIT" property="disablestatus" />
+    <result column="withdrawal" jdbcType="DECIMAL" property="withdrawal" />
+    <result column="orderMoney" jdbcType="DECIMAL" property="ordermoney" />
+    <result column="customerServerId" jdbcType="BIGINT" property="customerserverid" />
+    <result column="institutionsId" jdbcType="VARCHAR" property="institutionsid" />
+    <result column="realName" jdbcType="VARCHAR" property="realname" />
+    <result column="auditStatus" jdbcType="VARCHAR" property="auditstatus" />
+    <result column="applyTime" jdbcType="TIMESTAMP" property="applytime" />
+    <result column="partner" jdbcType="VARCHAR" property="partner" />
+    <result column="lastTime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="newMan" jdbcType="TINYINT" property="newman" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, avatar, nick_name, gender, province, city, unionid, mall_openid, yuer_openid, 
+    service_number_openid, phone, create_time, update_time, quantity, isLeaguer, source, 
+    recommenderId, openid, balance, drawNum, lastDrawTime, todayDrawNum, fansNum, lastShareTime, 
+    weChatId, level, disableStatus, withdrawal, orderMoney, customerServerId, institutionsId, 
+    realName, auditStatus, applyTime, partner, lastTime, newMan
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lianlian.entity.UserEntity">
+    insert into user (id, avatar, nick_name, 
+      gender, province, city, 
+      unionid, mall_openid, yuer_openid, 
+      service_number_openid, phone, create_time, 
+      update_time, quantity, isLeaguer, 
+      source, recommenderId, openid, 
+      balance, drawNum, lastDrawTime, 
+      todayDrawNum, fansNum, lastShareTime, 
+      weChatId, level, disableStatus, 
+      withdrawal, orderMoney, customerServerId, 
+      institutionsId, realName, auditStatus, 
+      applyTime, partner, lastTime, 
+      newMan)
+    values (#{id,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{unionid,jdbcType=VARCHAR}, #{mallOpenid,jdbcType=VARCHAR}, #{yuerOpenid,jdbcType=VARCHAR}, 
+      #{serviceNumberOpenid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{quantity,jdbcType=INTEGER}, #{isleaguer,jdbcType=INTEGER}, 
+      #{source,jdbcType=VARCHAR}, #{recommenderid,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{drawnum,jdbcType=INTEGER}, #{lastdrawtime,jdbcType=TIMESTAMP}, 
+      #{todaydrawnum,jdbcType=INTEGER}, #{fansnum,jdbcType=INTEGER}, #{lastsharetime,jdbcType=TIMESTAMP}, 
+      #{wechatid,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{disablestatus,jdbcType=BIT}, 
+      #{withdrawal,jdbcType=DECIMAL}, #{ordermoney,jdbcType=DECIMAL}, #{customerserverid,jdbcType=BIGINT}, 
+      #{institutionsid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{auditstatus,jdbcType=VARCHAR}, 
+      #{applytime,jdbcType=TIMESTAMP}, #{partner,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}, 
+      #{newman,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianlian.entity.UserEntity">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="unionid != null">
+        unionid,
+      </if>
+      <if test="mallOpenid != null">
+        mall_openid,
+      </if>
+      <if test="yuerOpenid != null">
+        yuer_openid,
+      </if>
+      <if test="serviceNumberOpenid != null">
+        service_number_openid,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="isleaguer != null">
+        isLeaguer,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="recommenderid != null">
+        recommenderId,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="drawnum != null">
+        drawNum,
+      </if>
+      <if test="lastdrawtime != null">
+        lastDrawTime,
+      </if>
+      <if test="todaydrawnum != null">
+        todayDrawNum,
+      </if>
+      <if test="fansnum != null">
+        fansNum,
+      </if>
+      <if test="lastsharetime != null">
+        lastShareTime,
+      </if>
+      <if test="wechatid != null">
+        weChatId,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="disablestatus != null">
+        disableStatus,
+      </if>
+      <if test="withdrawal != null">
+        withdrawal,
+      </if>
+      <if test="ordermoney != null">
+        orderMoney,
+      </if>
+      <if test="customerserverid != null">
+        customerServerId,
+      </if>
+      <if test="institutionsid != null">
+        institutionsId,
+      </if>
+      <if test="realname != null">
+        realName,
+      </if>
+      <if test="auditstatus != null">
+        auditStatus,
+      </if>
+      <if test="applytime != null">
+        applyTime,
+      </if>
+      <if test="partner != null">
+        partner,
+      </if>
+      <if test="lasttime != null">
+        lastTime,
+      </if>
+      <if test="newman != null">
+        newMan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="mallOpenid != null">
+        #{mallOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="yuerOpenid != null">
+        #{yuerOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNumberOpenid != null">
+        #{serviceNumberOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="isleaguer != null">
+        #{isleaguer,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderid != null">
+        #{recommenderid,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="drawnum != null">
+        #{drawnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastdrawtime != null">
+        #{lastdrawtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todaydrawnum != null">
+        #{todaydrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="fansnum != null">
+        #{fansnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastsharetime != null">
+        #{lastsharetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wechatid != null">
+        #{wechatid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="disablestatus != null">
+        #{disablestatus,jdbcType=BIT},
+      </if>
+      <if test="withdrawal != null">
+        #{withdrawal,jdbcType=DECIMAL},
+      </if>
+      <if test="ordermoney != null">
+        #{ordermoney,jdbcType=DECIMAL},
+      </if>
+      <if test="customerserverid != null">
+        #{customerserverid,jdbcType=BIGINT},
+      </if>
+      <if test="institutionsid != null">
+        #{institutionsid,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        #{auditstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null">
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="partner != null">
+        #{partner,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null">
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newman != null">
+        #{newman,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianlian.entity.UserEntity">
+    update user
+    <set>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="mallOpenid != null">
+        mall_openid = #{mallOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="yuerOpenid != null">
+        yuer_openid = #{yuerOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceNumberOpenid != null">
+        service_number_openid = #{serviceNumberOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="isleaguer != null">
+        isLeaguer = #{isleaguer,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderid != null">
+        recommenderId = #{recommenderid,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="drawnum != null">
+        drawNum = #{drawnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastdrawtime != null">
+        lastDrawTime = #{lastdrawtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todaydrawnum != null">
+        todayDrawNum = #{todaydrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="fansnum != null">
+        fansNum = #{fansnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastsharetime != null">
+        lastShareTime = #{lastsharetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wechatid != null">
+        weChatId = #{wechatid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="disablestatus != null">
+        disableStatus = #{disablestatus,jdbcType=BIT},
+      </if>
+      <if test="withdrawal != null">
+        withdrawal = #{withdrawal,jdbcType=DECIMAL},
+      </if>
+      <if test="ordermoney != null">
+        orderMoney = #{ordermoney,jdbcType=DECIMAL},
+      </if>
+      <if test="customerserverid != null">
+        customerServerId = #{customerserverid,jdbcType=BIGINT},
+      </if>
+      <if test="institutionsid != null">
+        institutionsId = #{institutionsid,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null">
+        auditStatus = #{auditstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null">
+        applyTime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="partner != null">
+        partner = #{partner,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null">
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newman != null">
+        newMan = #{newman,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianlian.entity.UserEntity">
+    update user
+    set avatar = #{avatar,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      mall_openid = #{mallOpenid,jdbcType=VARCHAR},
+      yuer_openid = #{yuerOpenid,jdbcType=VARCHAR},
+      service_number_openid = #{serviceNumberOpenid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      quantity = #{quantity,jdbcType=INTEGER},
+      isLeaguer = #{isleaguer,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      recommenderId = #{recommenderid,jdbcType=BIGINT},
+      openid = #{openid,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      drawNum = #{drawnum,jdbcType=INTEGER},
+      lastDrawTime = #{lastdrawtime,jdbcType=TIMESTAMP},
+      todayDrawNum = #{todaydrawnum,jdbcType=INTEGER},
+      fansNum = #{fansnum,jdbcType=INTEGER},
+      lastShareTime = #{lastsharetime,jdbcType=TIMESTAMP},
+      weChatId = #{wechatid,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      disableStatus = #{disablestatus,jdbcType=BIT},
+      withdrawal = #{withdrawal,jdbcType=DECIMAL},
+      orderMoney = #{ordermoney,jdbcType=DECIMAL},
+      customerServerId = #{customerserverid,jdbcType=BIGINT},
+      institutionsId = #{institutionsid,jdbcType=VARCHAR},
+      realName = #{realname,jdbcType=VARCHAR},
+      auditStatus = #{auditstatus,jdbcType=VARCHAR},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      partner = #{partner,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      newMan = #{newman,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
