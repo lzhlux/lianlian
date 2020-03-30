@@ -29,7 +29,7 @@ public class UserTestApiController {
      * 查询
      */
     @GetMapping("/findUserById")
-    @ApiOperation("查询用户接口")
+    @ApiOperation("查询用户的接口")
     public ResultData findUserById(@RequestParam(value = "id") Long id) {
         UserEntity userEntity=userTestApiService.findUserById(1l);
         return ResultData.success(userEntity);
